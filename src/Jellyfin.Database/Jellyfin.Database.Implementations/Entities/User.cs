@@ -270,6 +270,12 @@ namespace Jellyfin.Database.Implementations.Entities
         public long InternalId { get; set; }
 
         /// <summary>
+        /// Gets or sets the tenant this user belongs to.
+        /// Null means this is a standard Jellyfin user.
+        /// </summary>
+        public Guid? TenantId { get; set; }
+
+        /// <summary>
         /// Gets or sets the user's profile image. Can be <c>null</c>.
         /// </summary>
         // [ForeignKey("UserId")]

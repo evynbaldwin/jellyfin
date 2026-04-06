@@ -84,6 +84,11 @@ public class JellyfinDbContext(DbContextOptions<JellyfinDbContext> options, ILog
     public DbSet<User> Users => Set<User>();
 
     /// <summary>
+    /// Gets the <see cref="DbSet{TEntity}"/> containing the tenants.
+    /// </summary>
+    public DbSet<Tenant> Tenants => Set<Tenant>();
+
+    /// <summary>
     /// Gets the <see cref="DbSet{TEntity}"/> containing the trickplay metadata.
     /// </summary>
     public DbSet<TrickplayInfo> TrickplayInfos => Set<TrickplayInfo>();
@@ -315,6 +320,12 @@ public class JellyfinDbContext(DbContextOptions<JellyfinDbContext> options, ILog
 
         // Configuration for each entity is in its own class inside 'ModelConfiguration'.
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(JellyfinDbContext).Assembly);
+
+        modelBuilder.Entity<User>()
+            .HasOne<Tenant>()
+            .WithMany()
+            .HasForeignKey(u => u.TenantId)
+            .OnDelete(DeleteBehavior.SetNull);
     }
 
     /// <inheritdoc />

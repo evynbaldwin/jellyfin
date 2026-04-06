@@ -96,6 +96,12 @@ namespace MediaBrowser.Model.Dto
         public UserConfiguration Configuration { get; set; }
 
         /// <summary>
+        /// Gets or sets the Tenant ID this user belongs to.
+        /// Null means this is a standard (non-tenant) Jellyfin user.
+        /// </summary>
+        public Guid? TenantId { get; set; }
+
+        /// <summary>
         /// Gets or sets the policy.
         /// </summary>
         /// <value>The policy.</value>
